@@ -23,8 +23,8 @@
 
 
 <div class="btn-container">
-	<button on:click={lockInGains}>stop</button> 
-	<button on:click={roleDice}>roll!</button> 
+	<button on:click={lockInGains}>stop</button>
+	<button on:click={roleDice} disabled={state.turnPhase==='choose'}>roll!</button>
 	<div>
 		Role:
 		<span>{die1}</span>
@@ -140,20 +140,21 @@
 		  player1Ropes: [], // deprecated
 		  player2Chips: { ...defaultPlayerChips },
 		  player2Ropes: [], //deprecated
+			turnPhase: `roll`, // roll | choose
 		  ownedRopes: [],
 		  colColors: {
-		  2: `border: 1px solid black`,
-		  3: `border: 1px solid black`,
-		  4: `border: 1px solid black`,
-		  5: `border: 1px solid black`,
-		  6: `border: 1px solid black`,
-		  7: `border: 1px solid black`,
-		  8: `border: 1px solid black`,
-		  9: `border: 1px solid black`,
-		  10: `border: 1px solid black`,
-		  11: `border: 1px solid black`,
-		  12: `border: 1px solid black`,
-	  }
+		    2: `border: 1px solid black`,
+		    3: `border: 1px solid black`,
+		    4: `border: 1px solid black`,
+		    5: `border: 1px solid black`,
+		    6: `border: 1px solid black`,
+		    7: `border: 1px solid black`,
+		    8: `border: 1px solid black`,
+		    9: `border: 1px solid black`,
+		    10: `border: 1px solid black`,
+		    11: `border: 1px solid black`,
+		    12: `border: 1px solid black`,
+	    }
 	  }
 	, ascTop = 370
 	, ascLeft = 240
@@ -219,6 +220,7 @@
 
 		moveChip(ps[0])
 		if (ps[1]) moveChip(ps[1])
+		state.turnPhase = `roll`
 	}
 	function moveChip (rope) {
 		const playerRopePos = startingPositions[rope]
@@ -279,7 +281,7 @@
 		die2 = role()
 		die3 = role()
 		die4 = role()
-
+		state.turnPhase = `choose`
 		const combinations = [
 			[
 				Number(die1) + Number(die2), 
@@ -421,4 +423,3 @@
 		bottom: 50px;
 	}
 </style>
-

@@ -1,5 +1,7 @@
 Live at https://cant-stop.vercel.app/
 
+Will automatically deploy by pushing to `dev` branch
+
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
 ---

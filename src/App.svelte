@@ -345,6 +345,7 @@
 	function reset () {
 		state.player = state.player === 1 ? 2 : 1
 		state.activeChips = [ ...defaultChips ]
+		state.turnPhase = `roll`
 		if (state.player === 1) {
 			startingPositions = { ...state.player1Chips }
 		} else {

@@ -78,8 +78,11 @@
 {/each}
 
 <script>
-  
-	let foo = `black`
+	let ps = []
+	let die1 = `3`
+	let die2 = `1`
+	let die3 = `6`
+	let die4 = `3`
   const chip1Home = [120, 100]
 	, chip2Home = [87, 140]
 	, chip3Home = [87, 100]
@@ -215,29 +218,23 @@
 	;
 
 	let startingPositions = { ...defaultPlayerChips }
-	
-	function moveChips(ps) {
-
-		moveChip(ps[0])
-		if (ps[1]) moveChip(ps[1])
+	function moveChips(ropeChoice) {
+		moveChip(ropeChoice[0])
+		if (ropeChoice[1]) moveChip(ropeChoice[1])
 		state.turnPhase = `roll`
+		ps = []
 	}
 	function moveChip (rope) {
 		const playerRopePos = startingPositions[rope]
-		
 		const chipOnRope = state.activeChips.find(chip => {
 			if (chip.rope === rope) return chip
 		})
-
 		const availableChip = state.activeChips.find(x => x.isAvailable)
-  
 		const chipToUse = chipOnRope || availableChip
 		const playerChips = state.player === 1 ? state.player1Chips : state.player2Chips
 		const playerPosition = playerChips[rope]
 		const position = (chipToUse.position || playerPosition) + 1 
-
 		const location = getNewLocation(rope, playerRopePos)
-
 	  const updatedChip = {
 			...chipToUse,
 			location,
@@ -269,11 +266,6 @@
 	function getX (rope) {
 		return ropeLocations[rope]
 	}
-	let ps = []
-	let die1 = `3`
-	let die2 = `1`
-	let die3 = `6`
-	let die4 = `3`
 	function roleDice () {
     ps = [] // reset
 		const role = () => Math.floor(Math.random()*6+1)
